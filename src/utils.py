@@ -1,14 +1,12 @@
-import numpy as np
-import matplotlib.pyplot as plt
 import cv2
-from pathlib import Path
+import numpy as np
 from skimage import io
 
-import matplotlib.animation as ani
-from IPython.display import HTML
+from pathlib import Path
 import matplotlib
+import matplotlib.pyplot as plt
+import matplotlib.animation as ani
 matplotlib.rcParams['animation.embed_limit'] = 1000
-%matplotlib inline
 
 
 def _animate(nframe):
@@ -50,5 +48,9 @@ def make_gif(source_dir='../data/source/test_img',
 
     anim = ani.FuncAnimation(fig, animate, frames=len(target_label_paths), interval=1000/24)
     plt.close()
-    js_anim = HTML(anim.to_jshtml())
     anim.save("output.gif", writer="imagemagick")
+
+    ipython = False
+    if ipython:
+        from IPython.display import HTML
+        js_anim = HTML(anim.to_jshtml())
